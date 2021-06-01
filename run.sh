@@ -70,9 +70,9 @@ if [[ -n "${PUBLIC_HOST_ADDR}" && -n "${PUBLIC_HOST_PORT}" ]]; then
     while true
     do
         if [ -z "${ROOT_PASS}" ]; then
-            ssh -o StrictHostKeyChecking=no -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT} -o TCPKeepAlive=yes -o ServerAliveInterval=30
+            ssh -o StrictHostKeyChecking=no -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT} -o TCPKeepAlive=yes -o ServerAliveInterval=30 -o ExitOnForwardFailure=yes
         else
-            sshpass -p ${ROOT_PASS} ssh -o StrictHostKeyChecking=no -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT} -o TCPKeepAlive=yes -o ServerAliveInterval=30
+            sshpass -p ${ROOT_PASS} ssh -o StrictHostKeyChecking=no -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT} -o TCPKeepAlive=yes -o ServerAliveInterval=30 -o ExitOnForwardFailure=yes
         fi
         echo "=> Tunnel Link down!"
         echo "=> Wait 15 seconds to reconnect"
